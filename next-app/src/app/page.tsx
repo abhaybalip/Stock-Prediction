@@ -13,7 +13,19 @@ export default function Home(params: any) {
         </div>
       </div>
 
-      <div id="app-body"></div>
+      <div id="app-body">
+        <a href='/ps'>
+          <div className='btn-link'>Problem Statement</div>
+        </a>
+
+        <a href='/sol'>
+          <div className='btn-link'>Solution Approach</div>
+        </a>
+
+        <a href='/pred'>
+          <div className='btn-link'>Stock Predictor</div>
+        </a>
+      </div>
 
       <div id="app-footer">
         <div className='header-h3'>Devloped by <a className='link' href='/intro'>@TeamIntro</a> Copyright &copy; {year} 💝 </div>
