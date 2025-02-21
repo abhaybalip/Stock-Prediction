@@ -1,5 +1,9 @@
 
+python-env/Include/*
 python-env/Lib/*
+python-env/share
+python-env/static
+
 
 # Ignore Python bytecode files
 __pycache__/

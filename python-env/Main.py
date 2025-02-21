@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import yfinance as yf
 from arima_algo import ARIMA_ALGO
 from lstm_algo import LSTM_ALGO
@@ -6,7 +7,7 @@ from lin_reg_algo import LIN_REG_ALGO
 import pandas as pd
 
 app = Flask(__name__)
-
+CORS(app)
 # Function to download historical stock data
 def get_historical(quote):
     try:
