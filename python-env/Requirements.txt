@@ -1,1 +1,10 @@
 Flask
+alpha_vantage
+pandas
+numpy
+statsmodels
+scikit-learn
+matplotlib
+yfinance
+keras
+tensorflow

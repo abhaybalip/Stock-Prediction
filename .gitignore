@@ -1,5 +1,23 @@
-# Python-env 
+# Ignore the Python virtual environment directory
+python-env/
 
-# python-env/include/
-python-env/Lib/
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore .env files (for environment variables)
+.env
+*.env
+
+# Ignore IDE specific files (optional, based on your IDE)
+.vscode/
+.idea/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
