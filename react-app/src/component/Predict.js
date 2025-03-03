@@ -1,7 +1,7 @@
-
 import React from 'react';
-
 import '../asset/style/Predict.css';
+
+
 
 async function Predictor(nm) {
     if (nm) {
@@ -12,53 +12,91 @@ async function Predictor(nm) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ nm: nm })
-            })
-            const data = await response.json()
-            return data
+            });
+            const data = await response.json();
+            return data;
         } catch (error) {
-            console.error('Error:', error)
-            return { "error": error.message }
+            console.error('Error:', error);
+            return { "error": error.message };
         }
     } else {
-        return { "error": "No name provided" }
+        return { "error": "No stock symbol provided" };
     }
 }
 
-
 const Predict = () => {
     const [result, setResult] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);  // New state for loading
+    const [stockSymbol, setStockSymbol] = React.useState("");
+
+    const handlePrediction = async () => {
+        const ip = document.querySelector('#name').value;
+        if (ip) {
+            setLoading(true); // Start loading when request is made
+            const res = await Predictor(ip);
+            setLoading(false); // Stop loading when result is received
+            if (res && res.stock && res.algo_output) {
+                setResult(res);
+                setStockSymbol(ip);
+            } else {
+                window.alert('No prediction available or invalid response.');
+            }
+        } else {
+            window.alert('Please enter a stock symbol');
+        }
+    };
+
+    const handleReset = () => {
+        setResult(null);
+        setStockSymbol("");
+        setLoading(false);  // Reset loading state
+        document.querySelector('#name').value = '';
+    };
 
     return (
         <div className='app-main-prd'>
-            <div>
-                <input type='text' id='name' placeholder='Enter stock symbol' />
+            <div className='prd'>
+                <input
+                    type='text'
+                    className='prd-ip'
+                    id='name'
+                    placeholder='Enter stock symbol'
+                />
+                <div className='prd-btn'>
+                    <div className='btn-submit' onClick={handlePrediction}>Predict</div>
+                    <div className='btn-reset' onClick={handleReset}>Reset</div>
+                </div>
 
-                <div onClick={async () => {
-                    const ip = document.querySelector('#name').value
-                    if (ip) {
-                        const res = await Predictor(ip)
-                        setResult(res)
-                    } else {
-                        window.alert('Please enter a stock symbol');
-                    }
-                }}>Predict</div>
+                {/* Loading Indicator */}
+                {loading && (
+                    <div className="loading-spinner">
+                        <div className="spinner"></div>
+                        <p>Loading...</p>
+                    </div>
+                )}
 
-                <div onClick={() => {
-                    setResult(null); // Reset the result
-                    document.querySelector('#name').value = ''; // Clear input field
-                }}>Reset</div>
-            </div>
-
-            {/* Display result if available */}
-            <div style={{
-                display: result ? 'block' : 'none'
-            }}>
-                {
-                    JSON.stringify(result) // Display the result as JSON
-                }
+                {/* Display result if available */}
+                {result && result.algo_output && result.algo_output.length > 0 ? (
+                    <div className="prd-res show">
+                        <h3>Prediction for {stockSymbol}:</h3>
+                        <div className="prediction-container">
+                            {result.algo_output.map((algo, index) => (
+                                <div key={index} className="prediction-item">
+                                    <h4>{algo.algorithm}</h4>
+                                    <p><strong>Prediction:</strong> {algo.prediction}</p>
+                                    <p><strong>Error:</strong> {algo.error}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="prd-res">
+                        <p>No predictions available.</p>
+                    </div>
+                )}
             </div>
         </div>
     );
-}
+};
 
 export default Predict;

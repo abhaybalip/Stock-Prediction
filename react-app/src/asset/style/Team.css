@@ -1,0 +1,81 @@
+.app-main-team {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg);
+}
+
+.tm-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+    width: 100%;
+    /* Ensure full width for the list */
+}
+
+.tm-li {
+    background-color: rgba(33, 33, 33, 0.9);
+    border-radius: 10px;
+    padding: var(--space-md);
+    width: 100%;
+    /* Use 100% width to fill available space */
+    max-width: 600px;
+    /* Increase the maximum width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tm-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+    /* Center the name */
+}
+
+.tm-links {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    /* Center the links horizontally */
+}
+
+.tm-link {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.tm-link:hover {
+    transform: scale(1.1);
+    color: var(--accent-color);
+}
+
+.tm-link:active {
+    transform: scale(1);
+}
+
+/* Add some spacing for responsiveness */
+@media (max-width: 600px) {
+    .tm-li {
+        width: 90%;
+        /* Adjust the width for smaller screens */
+        padding: var(--space-sm);
+        /* Reduce padding for small screens */
+    }
+
+    .tm-name {
+        font-size: 1.25rem;
+        /* Adjust font size for smaller screens */
+    }
+
+    .tm-link {
+        font-size: 1.25rem;
+        /* Adjust icon size for small screens */
+    }
+}

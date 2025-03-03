@@ -1,0 +1,161 @@
+.app-main-prd {
+    width: 100%;
+}
+
+.prd {
+    width: var(--max-width-content);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: rgba(33, 33, 33, 0.9);
+    padding: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.prd-ip {
+    width: 50%;
+    height: var(--len-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    background-color: var(--primary-color);
+    font-weight: bold;
+    font-size: larger;
+    color: var(--background-color);
+    padding: var(--space-sm);
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.prd-ip:focus {
+    border-color: var(--accent-color);
+    background-color: var(--gray-200);
+}
+
+.prd-ip::placeholder {
+    color: var(--gray-300);
+    font-style: italic;
+}
+
+.prd-btn {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-md);
+    justify-content: center;
+}
+
+.btn-reset, .btn-submit {
+    font-size: var(--fontsize-s-2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-reset:hover, .btn-submit:hover {
+    background-color: var(--gray-300);
+    transform: scale(1.05);
+}
+
+.btn-reset:active, .btn-submit:active {
+    background-color: var(--gray-400);
+    transform: scale(1);
+}
+
+.btn-reset {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.btn-submit {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.btn-reset:focus, .btn-submit:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* Styling for the result panel */
+.prd-res {
+    width: 100%;
+    max-width: var(--max-width-content);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: var(--space-md);
+    text-align: center;
+    color: var(--text-color);
+    font-size: var(--fontsize-s-2);
+    margin-top: var(--space-md);
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.prd-res.show {
+    display: block;
+    opacity: 1;
+}
+
+.prediction-container {
+    margin-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.prediction-item {
+    background-color: var(--gray-200);
+    padding: var(--space-sm);
+    border-radius: var(--border-radius);
+    color: var(--gray-400);
+    font-size: var(--fontsize-s-2);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-item h4 {
+    font-size: larger;
+    margin-bottom: var(--space-sm);
+}
+
+.prediction-item p {
+    margin: 0;
+}
+
+/* Loading Spinner Styles */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-md);
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: var(--text-color);
+    margin-top: var(--space-sm);
+    font-size: var(--fontsize-s-2);
+}
