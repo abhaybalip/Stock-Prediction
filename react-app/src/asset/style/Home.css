@@ -1,0 +1,133 @@
+.app-main-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: var(--space-lg);
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.hm-p1,
+.hm-p2,
+.hm-p3,
+.hm-p4 {
+    width: 100%;
+    max-width: var(--max-width-content);
+    margin-bottom: var(--space-xl);
+    position: relative;
+}
+
+.hm-p1,
+.hm-p2,
+.hm-p3,
+.hm-p4 {
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+}
+
+.hm-p1 {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    border: 1px solid var(--border-color);
+}
+
+.hm-p2 {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    border: 1px solid var(--border-color);
+}
+
+.hm-p3 {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    border: 1px solid var(--border-color);
+}
+
+.hm-p4 {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+    border: 1px solid var(--border-color);
+}
+
+.hm-p1 h2,
+.hm-p2 h2,
+.hm-p3 h2,
+.hm-p4 h2 {
+    font-size: var(--fontsize-2);
+    color: var(--primary-color);
+    margin-bottom: var(--space-sm);
+}
+
+.hm-p1 .p1-title,
+.hm-p2 .p2-title,
+.hm-p3 .p3-title,
+.hm-p4 .p4-title {
+    font-size: var(--fontsize-3);
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: var(--space-sm);
+}
+
+.hm-p1 .p1-txt,
+.hm-p2 .p2-txt,
+.hm-p3 .p3-txt,
+.hm-p4 .p4-txt {
+    font-size: var(--fontsize-1);
+    line-height: 1.6;
+    color: var(--secondary-color);
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+    position: relative;
+    z-index: 2;
+    display: block;
+}
+
+.hm-p1 .p1-txt span,
+.hm-p2 .p2-txt span,
+.hm-p3 .p3-txt span,
+.hm-p4 .p4-txt span {
+    display: block;
+    margin-bottom: var(--space-sm);
+}
+
+.hm-p1::before,
+.hm-p2::before,
+.hm-p3::before,
+.hm-p4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    /* A subtle overlay */
+    border-radius: var(--border-radius);
+    z-index: 1;
+    /* Ensures the overlay stays behind text */
+}
+
+@media (max-width: var(--small-screen)) {
+
+    .hm-p1 h2,
+    .hm-p2 h2,
+    .hm-p3 h2,
+    .hm-p4 h2 {
+        font-size: var(--fontsize-s-2);
+    }
+
+    .hm-p1 .p1-title,
+    .hm-p2 .p2-title,
+    .hm-p3 .p3-title,
+    .hm-p4 .p4-title {
+        font-size: var(--fontsize-s-3);
+    }
+
+    .hm-p1 .p1-txt,
+    .hm-p2 .p2-txt,
+    .hm-p3 .p3-txt,
+    .hm-p4 .p4-txt {
+        font-size: var(--fontsize-s-1);
+    }
+}

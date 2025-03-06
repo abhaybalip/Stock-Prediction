@@ -3,6 +3,8 @@
     display: flex;
     justify-content: center;
     padding: var(--space-lg);
+    background-color: var(--background-color);
+    /* Subtle background color for the whole page */
 }
 
 .tm-list {
@@ -11,67 +13,77 @@
     gap: var(--space-md);
     align-items: center;
     width: 100%;
-    /* Ensure full width for the list */
+    max-width: var(--max-width-content);
+    /* Ensures the list doesn't stretch too wide */
 }
 
 .tm-li {
-    background-color: rgba(33, 33, 33, 0.9);
-    border-radius: 10px;
+    background-color: rgba(33, 33, 33, 0.8);
+    /* Darker but subtle background */
+    border-radius: var(--border-radius);
     padding: var(--space-md);
     width: 100%;
-    /* Use 100% width to fill available space */
     max-width: 600px;
-    /* Increase the maximum width */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-sm);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Softer shadow for a more refined look */
+    transition: all 0.3s ease;
+}
+
+.tm-li:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Subtle hover effect */
+    background-color: rgba(33, 33, 33, 0.9);
+    /* Slightly darken on hover */
 }
 
 .tm-name {
-    font-size: 1.5rem;
+    font-size: var(--fontsize-2);
     font-weight: bold;
     color: var(--text-color);
     margin-bottom: var(--space-sm);
     text-align: center;
-    /* Center the name */
+    letter-spacing: 1px;
 }
 
 .tm-links {
     display: flex;
     gap: var(--space-md);
     justify-content: center;
-    /* Center the links horizontally */
 }
 
 .tm-link {
     font-size: 1.5rem;
-    color: var(--primary-color);
-    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    /* Slightly reduced opacity for a softer feel */
 }
 
 .tm-link:hover {
-    transform: scale(1.1);
-    color: var(--accent-color);
+    color: var(--primary-color);
+    transform: scale(1.05);
+    /* More subtle hover scale */
+    opacity: 1;
 }
 
 .tm-link:active {
     transform: scale(1);
 }
 
-/* Add some spacing for responsiveness */
+/* Adjust for smaller screens */
 @media (max-width: 600px) {
     .tm-li {
         width: 90%;
-        /* Adjust the width for smaller screens */
         padding: var(--space-sm);
-        /* Reduce padding for small screens */
     }
 
     .tm-name {
-        font-size: 1.25rem;
-        /* Adjust font size for smaller screens */
+        font-size: var(--fontsize-s-2);
+        /* Smaller title size on small screens */
     }
 
     .tm-link {
