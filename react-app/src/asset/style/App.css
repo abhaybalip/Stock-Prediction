@@ -1,56 +1,89 @@
+/* Main layout styles */
 .app {
     min-height: 100vh;
     width: 100%;
     background-color: var(--background-color);
     color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     user-select: none;
 }
 
+/* Navigation Bar Styles */
 .app-nav {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    /* Center the nav items */
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Soft dark background */
-    padding: var(--space-sm) 0;
-    /* Space top and bottom */
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Slight shadow for depth */
+    padding: var(--space-md) 0;
+    background-color: rgba(33, 33, 33, 0.9);
+    border-bottom: 2px solid var(--border-color);
 }
 
 .app-nav-item {
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--fontsize-1);
+    padding: var(--space-sm);
+    font-size: var(--fontsize-2);
     text-decoration: none;
-    color: var(--secondary-color);
-    /* Light gray color for the nav links */
-    text-transform: capitalize;
+    color: var(--text-color);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     border-radius: var(--border-radius);
 }
 
 .app-nav-item:hover {
     color: var(--primary-color);
-    /* Change text color on hover */
-    background-color: rgba(255, 255, 255, 0.2);
-    /* Subtle background change on hover */
-    transform: translateY(-2px);
-    /* Slight elevation effect */
+    background-color: var(--gray-300);
+    transform: scale(1.05);
 }
 
 .app-nav-item:active {
-    transform: translateY(0);
-    /* Reset on click for smooth interaction */
+    transform: scale(1);
 }
 
+/* Main Content Styles */
 .app-main {
     width: 100%;
     max-width: var(--max-width-content);
     min-height: 100vh;
     padding: var(--space-sm);
+}
+
+/* Footer Styles */
+.app-footer {
+    width: 100%;
+    background-color: rgba(33, 33, 33, 0.9);
+    color: var(--text-color);
+    padding: var(--space-md) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: var(--fontsize-s-1);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    bottom: 0;
+}
+
+.app-footer .footer-text {
+    margin-bottom: var(--space-xs);
+    opacity: 0.7;
+}
+
+.app-footer .footer-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.app-footer .footer-text a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.app-footer .copyright {
+    opacity: 0.6;
+    font-size: 0.875rem;
 }

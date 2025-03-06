@@ -10,10 +10,10 @@ const NavList = [
     {
         name: 'Home', path: '/', component: Home
     }, {
-        name: 'Team', path: '/team', component: Team
+        name: 'Predictor', path: '/predict', component: Predict
     }, {
-        name: 'Predict', path: '/predict', component: Predict
-    }
+        name: 'Team', path: '/team', component: Team
+    },
 ]
 
 const TeamData = [
