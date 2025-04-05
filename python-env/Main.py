@@ -1,60 +1,65 @@
+import base64
+import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import yfinance as yf
+
 from arima_algo import ARIMA_ALGO
 from lstm_algo import LSTM_ALGO
 from lin_reg_algo import LIN_REG_ALGO
-import pandas as pd
+from get_history import get_historical
+from Graph import generate_graph
 
 app = Flask(__name__)
 CORS(app)
-# Function to download historical stock data
-def get_historical(quote):
-    try:
-        data = yf.download(quote, period="2y", interval="1d")
-        if data.empty:
-            raise ValueError(f"No data found for stock symbol: {quote}")
-        data.to_csv(f'{quote}.csv')
-        return data
-    except Exception as e:
-        raise ValueError(f"Error downloading data: {str(e)}")
+logging.basicConfig(level=logging.INFO)
 
-# Prediction route
+def encode_image_from_file(image_path):
+    with open(image_path, 'rb') as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Retrieve JSON data from the POST request
         content = request.get_json()
+        symbol = content.get('nm', '').upper().strip()
+        if not symbol:
+            return jsonify({'error': 'Missing or invalid stock symbol (nm)'}), 400
 
-        # Validate that 'nm' is in the request JSON
-        if 'nm' not in content:
-            return jsonify({'error': 'Missing stock symbol (nm) in request'}), 400
-        
-        quote = content['nm']
-        
-        # Get historical data for the stock symbol
-        df = get_historical(quote)
-        
-        # Perform predictions using the different algorithms
-        arima_pred, error_arima = ARIMA_ALGO(df, quote)
-        lstm_pred, error_lstm = LSTM_ALGO(df,quote)
-        df, lr_pred, forecast_set, error_lr = LIN_REG_ALGO(df,quote)
-        
-        # Return the predictions in JSON format
+        logging.info(f"Fetching data for: {symbol}")
+        df = get_historical(symbol)
+
+        arima_pred, error_arima = ARIMA_ALGO(df, symbol)
+        lstm_pred, error_lstm = LSTM_ALGO(df, symbol)
+        df, lr_pred, _, error_lr = LIN_REG_ALGO(df, symbol)
+
+        image_paths = {
+            'ARIMA': f'./graph/{symbol}_ARIMA.png',
+            'LSTM': f'./graph/{symbol}_LSTM.png',
+            'Linear Regression': f'./graph/{symbol}_Linear_Regression.png'
+        }
+
+        base64_graphs = {
+            algo: encode_image_from_file(path)
+            for algo, path in image_paths.items()
+        }
+
+        predictions = sorted([
+            {'algorithm': 'ARIMA', 'prediction': arima_pred, 'error': error_arima, 'graph': base64_graphs['ARIMA']},
+            {'algorithm': 'LSTM', 'prediction': lstm_pred, 'error': error_lstm, 'graph': base64_graphs['LSTM']},
+            {'algorithm': 'Linear Regression', 'prediction': lr_pred, 'error': error_lr, 'graph': base64_graphs['Linear Regression']}
+        ], key=lambda x: x['error'])
+
         return jsonify({
-            'stock': quote,
-            'algo_output': [
-                {'algorithm': 'ARIMA', 'prediction': arima_pred, 'error': error_arima},
-                {'algorithm': 'LSTM', 'prediction': lstm_pred, 'error': error_lstm},
-                {'algorithm': 'Linear Regression', 'prediction': lr_pred, 'error': error_lr}
-            ]
+            'stock': symbol,
+            'algo_output': predictions
         })
 
-    except ValueError as e:
-        return jsonify({'error': str(e)}), 400
+    except ValueError as ve:
+        logging.error(f"ValueError: {ve}")
+        return jsonify({'error': str(ve)}), 400
     except Exception as e:
+        logging.exception("Unhandled error occurred")
         return jsonify({'error': f"An error occurred: {str(e)}"}), 500
 
-# Run the Flask application
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
